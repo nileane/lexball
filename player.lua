@@ -2,7 +2,7 @@
 -- A haxball clone in Lua and Love2d.
 
 local player = {
-    -- position
+    -- center position
     x = 0,
     y = 0,
 

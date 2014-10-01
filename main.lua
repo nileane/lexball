@@ -14,10 +14,18 @@ function love.load()
     love.window.setTitle(version)
     love.window.setMode(window.w, window.h)
 
+    -- load map object
+    map = require 'map'
+
     -- load player object
-    player = require('player')
-    player.x = window.w / 2
-    player.y = window.h / 2
+    player = require 'player'
+    player.x = map.w / 2
+    player.y = map.h / 2
+
+    -- load ball object
+    ball = require 'ball'
+    ball.x = map.w / 3
+    ball.y = map.h /2
 end
 
 function love.update(dt)
@@ -37,9 +45,29 @@ function love.update(dt)
         player.move.nohorizontal()
     end
 
+    -- collision detection player vs ball
+    if sqdist(player, ball) < (player.r + ball.r) ^ 2 then
+        print 'Collision detected!'
+    end
+
+    -- update objects
+    ball.update(dt)
     player.update(dt)
 end
 
 function love.draw()
+    ball.draw()
     player.draw()
+
+    -- debug
+    --print('Player (' .. player.x .. ', ' .. player.y .. ')')
+    --print('Ball (' .. ball.x .. ', ' .. ball.y .. ')')
+end
+
+function sqdist(a, b)
+    return (a.x - b.x) ^ 2 + (a.y - b.y) ^ 2
+end
+
+function dist(a, b)
+    return math.sqrt(sqdist(a, b))
 end
