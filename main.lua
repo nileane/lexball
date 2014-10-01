@@ -47,7 +47,17 @@ function love.update(dt)
 
     -- collision detection player vs ball
     if sqdist(player, ball) < (player.r + ball.r) ^ 2 then
-        print 'Collision detected!'
+        -- null the accelerations
+        player.a.x = 0
+        player.a.y = 0
+        ball.a.x = 0
+        ball.a.y = 0
+
+        -- calculate the velocities after elastic collision
+        player.v.x = (player.v.x * (player.m - ball.m) + 2 * ball.m * ball.v.x) / (player.m + ball.m)
+        player.v.y = (player.v.y * (player.m - ball.m) + 2 * ball.m * ball.v.y) / (player.m + ball.m)
+        ball.v.x = (ball.v.x * (ball.m - player.m) + 2 * player.m * player.v.x) / (ball.m + player.m)
+        ball.v.y = (ball.v.y * (ball.m - player.m) + 2 * player.m * player.v.y) / (ball.m + player.m)
     end
 
     -- update objects

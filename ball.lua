@@ -18,6 +18,9 @@ local ball = {
         y = 0
     },
 
+    -- mass
+    m = 10,
+
     -- radius
     r = 10,
 

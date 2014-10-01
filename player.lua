@@ -18,6 +18,9 @@ local player = {
         y = 0
     },
 
+    -- mass
+    m = 100,
+
     -- radius
     r = 16,
 
