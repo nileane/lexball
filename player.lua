@@ -44,33 +44,7 @@ local player = {
         -- update position
         player.x = dt * player.v.x + player.x
         player.y = dt * player.v.y + player.y
-    end,
-
-    move = {
-        up = function()
-            player.a.y = -1
-        end,
-
-        down = function()
-            player.a.y = 1
-        end,
-
-        left = function()
-            player.a.x = -1
-        end,
-
-        right = function()
-            player.a.x = 1
-        end,
-
-        novertical = function()
-            player.a.y = 0
-        end,
-
-        nohorizontal = function()
-            player.a.x = 0
-        end
-    }
+    end
 }
 
 return player
