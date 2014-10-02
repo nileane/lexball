@@ -15,6 +15,9 @@ function love.load()
     print(ascii)
     print(version)
 
+    -- anti-aliasing
+    love.graphics.setDefaultFilter('nearest', 'nearest')
+
     -- window
     window = {
         w = 800,

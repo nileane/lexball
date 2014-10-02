@@ -33,7 +33,7 @@ local ball = {
 
     draw = function()
         love.graphics.setColor(ball.color.r, ball.color.g, ball.color.b)
-        love.graphics.circle('fill', ball.x, ball.y, ball.r)
+        love.graphics.circle('fill', math.floor(ball.x), math.floor(ball.y), ball.r)
     end,
 
     update = function(dt)

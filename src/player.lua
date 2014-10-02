@@ -33,7 +33,7 @@ local player = {
 
     draw = function()
         love.graphics.setColor(player.color.r, player.color.g, player.color.b)
-        love.graphics.circle('fill', player.x, player.y, player.r)
+        love.graphics.circle('fill', math.floor(player.x), math.floor(player.y), player.r)
     end,
 
     update = function(dt)
