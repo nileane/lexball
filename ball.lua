@@ -19,7 +19,7 @@ local ball = {
     },
 
     -- mass
-    m = 10,
+    m = 50,
 
     -- radius
     r = 10,

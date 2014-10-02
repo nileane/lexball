@@ -3,7 +3,7 @@
 
 function love.load()
     -- version info
-    version = 'Version 1.0 (20141001)'
+    version = 'Version 1.0 (20141002)'
     ascii = [[
  _              _           _ _
 | |    _____  _| |__   __ _| | |
