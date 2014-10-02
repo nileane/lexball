@@ -55,48 +55,48 @@ function love.update(dt)
     end
 
     -- collision detection player vs ball
-    collision = sqdist(player, ball) < (player.r + ball.r) ^ 2
+    local collision = sqdist(player, ball) < (player.r + ball.r) ^ 2
     -- radii vector player-ball
-    radii = {
+    local radii = {
         x = (ball.x - player.x),
         y = (ball.y - player.y)
     }
     -- make sure the 2 objects are moving towards each other
-    convergent = dot({ x = ball.v.x - player.v.x, y = ball.v.y - player.v.y }, radii) < 0
+    local convergent = dot({ x = ball.v.x - player.v.x, y = ball.v.y - player.v.y }, radii) < 0
     if collision and convergent then
         -- normal collision vector
-        normal = normalize(radii)
+        local normal = normalize(radii)
 
         -- decompose velocity vectors into collision and remaining parts using dot product projection
-        dot_player = dot(player.v, normal)
-        dot_ball = dot(ball.v, normal)
+        local dot_player = dot(player.v, normal)
+        local dot_ball = dot(ball.v, normal)
 
         -- calculate collision velocity
-        vcoll_player = {
+        local vcoll_player = {
             x = dot_player * normal.x,
             y = dot_player * normal.y
         }
-        vcoll_ball= {
+        local vcoll_ball= {
             x = dot_ball * normal.x,
             y = dot_ball * normal.y
         }
 
         -- calculate remaining velocity
-        vrem_player = {
+        local vrem_player = {
             x = player.v.x - vcoll_player.x,
             y = player.v.y - vcoll_player.y
         }
-        vrem_ball= {
+        local vrem_ball= {
             x = ball.v.x - vcoll_ball.x,
             y = ball.v.y - vcoll_ball.y
         }
 
         -- apply elastic collision with conservation of momentum using the collision part only
-        vref_player = {
+        local vref_player = {
             x = ((player.m - ball.m) * vcoll_player.x + 2 * ball.m * vcoll_ball.x) / (player.m + ball.m),
             y = ((player.m - ball.m) * vcoll_player.y + 2 * ball.m * vcoll_ball.y) / (player.m + ball.m)
         }
-        vref_ball = {
+        local vref_ball = {
             x = ((ball.m - player.m) * vcoll_ball.x + 2 * player.m * vcoll_player.x) / (ball.m + player.m),
             y = ((ball.m - player.m) * vcoll_ball.y + 2 * player.m * vcoll_player.y) / (ball.m + player.m)
         }
@@ -114,7 +114,7 @@ function love.update(dt)
 end
 
 function love.draw()
-    --map.draw()
+    map.draw()
     ball.draw()
     player.draw()
 end

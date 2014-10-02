@@ -26,9 +26,9 @@ local ball = {
 
     -- color
     color = {
-        r = 196,
-        g = 255,
-        b = 86
+        r = 255,
+        g = 250,
+        b = 220
     },
 
     draw = function()
