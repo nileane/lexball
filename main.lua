@@ -24,15 +24,15 @@ function love.load()
     love.window.setMode(window.w, window.h)
 
     -- load map object
-    map = require 'map'
+    map = require 'src/map'
 
     -- load player object
-    player = require 'player'
+    player = require 'src/player'
     player.x = map.w / 2
     player.y = map.h / 2
 
     -- load ball object
-    ball = require 'ball'
+    ball = require 'src/ball'
     ball.x = map.w / 3
     ball.y = map.h /2
 end
@@ -114,6 +114,7 @@ function love.update(dt)
 end
 
 function love.draw()
+    --map.draw()
     ball.draw()
     player.draw()
 end

@@ -3,7 +3,12 @@
 
 local map = {
     w = 800,
-    h = 600
+    h = 600,
+
+    goals = {
+        top = 280,
+        bottom = 320
+    }
 }
 
 return map
