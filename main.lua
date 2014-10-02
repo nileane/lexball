@@ -1,6 +1,11 @@
 -- Lexball <3
 -- A haxball clone in Lua and Love2d.
 
+function love.conf(t)
+    -- anti-aliasing
+    t.window.fsaa = 4
+end
+
 function love.load()
     -- version info
     version = 'Version 1.0 (20141002)'
@@ -15,8 +20,8 @@ function love.load()
     print(ascii)
     print(version)
 
-    -- anti-aliasing
-    love.graphics.setDefaultFilter('nearest', 'nearest')
+    -- filter
+    --love.graphics.setDefaultFilter('nearest', 'nearest')
 
     -- window
     window = {
