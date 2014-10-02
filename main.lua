@@ -119,6 +119,10 @@ function love.update(dt)
     -- update actual objects
     player.update(dt)
     ball.update(dt)
+
+    -- apply friction effect
+    player.friction(map.friction)
+    ball.friction(map.friction)
 end
 
 function love.draw()

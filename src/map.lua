@@ -5,6 +5,10 @@ local map = {
     w = 800,
     h = 600,
 
+    -- friction, float value between 0 and 1
+    -- (0 means no friction at all, like in space)
+    friction = 0.005,
+
     goals = {
         top = 280,
         bottom = 320

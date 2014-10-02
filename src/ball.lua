@@ -44,6 +44,11 @@ local ball = {
         -- update position
         ball.x = dt * ball.v.x + ball.x
         ball.y = dt * ball.v.y + ball.y
+    end,
+
+    friction = function(f)
+        ball.v.x = ball.v.x - f * ball.v.x
+        ball.v.y = ball.v.y - f * ball.v.y
     end
 }
 

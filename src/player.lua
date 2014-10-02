@@ -44,6 +44,11 @@ local player = {
         -- update position
         player.x = dt * player.v.x + player.x
         player.y = dt * player.v.y + player.y
+    end,
+
+    friction = function(f)
+        player.v.x = player.v.x - f * player.v.x
+        player.v.y = player.v.y - f * player.v.y
     end
 }
 
