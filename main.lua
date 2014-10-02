@@ -38,7 +38,6 @@ function love.load()
 end
 
 function love.update(dt)
-
     -- handle keyboard events
     if love.keyboard.isDown('up') then
         player.a.y = -1
@@ -56,13 +55,21 @@ function love.update(dt)
     end
 
     -- collision detection player vs ball
-    if sqdist(player, ball) < (player.r + ball.r) ^ 2 then
+    collision = sqdist(player, ball) < (player.r + ball.r) ^ 2
+    -- radii vector player-ball
+    radii = {
+        x = (ball.x - player.x),
+        y = (ball.y - player.y)
+    }
+    -- make sure the 2 objects are moving towards each other
+    convergent = dot({ x = ball.v.x - player.v.x, y = ball.v.y - player.v.y }, radii) < 0
+    if collision and convergent then
         -- normal collision vector
-        normal = normalize({ x = (ball.x - player.x), y = (ball.y - player.y) })
+        normal = normalize(radii)
 
         -- decompose velocity vectors into collision and remaining parts using dot product projection
-        dot_player = player.v.x * normal.x + player.v.y * normal.y
-        dot_ball = ball.v.x * normal.x + ball.v.y * normal.y
+        dot_player = dot(player.v, normal)
+        dot_ball = dot(ball.v, normal)
 
         -- calculate collision velocity
         vcoll_player = {
@@ -104,7 +111,6 @@ function love.update(dt)
     -- update actual objects
     player.update(dt)
     ball.update(dt)
-
 end
 
 function love.draw()
@@ -125,4 +131,8 @@ function normalize(v)
     v.x = v.x / norm
     v.y = v.y / norm
     return v
+end
+
+function dot(u, v)
+    return (u.x * v.x + u.y * v.y)
 end
