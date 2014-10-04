@@ -1,55 +1,59 @@
 -- Lexball <3
 -- A haxball clone in Lua and Love2d.
 
-local ball = {
-    -- center position
-    x = 0,
-    y = 0,
+Ball = {}
 
-    -- velocity
-    v = {
+function Ball:new()
+    return setmetatable({
+
+        -- center position
         x = 0,
-        y = 0
-    },
+        y = 0,
 
-    -- acceleration
-    a = {
-        x = 0,
-        y = 0
-    },
+        -- velocity
+        v = {
+            x = 0,
+            y = 0
+        },
 
-    -- mass
-    m = 50,
+        -- acceleration
+        a = {
+            x = 0,
+            y = 0
+        },
 
-    -- radius
-    r = 10,
+        -- mass
+        m = 50,
 
-    -- color
-    color = {
-        r = 255,
-        g = 250,
-        b = 220
-    },
+        -- radius
+        r = 10,
 
-    draw = function()
-        love.graphics.setColor(ball.color.r, ball.color.g, ball.color.b)
-        love.graphics.circle('fill', ball.x, ball.y, ball.r)
-    end,
+        -- color
+        color = {
+            r = 255,
+            g = 250,
+            b = 220
+        }
 
-    update = function(dt)
-        -- update velocity
-        ball.v.x = 100 * dt * ball.a.x + ball.v.x
-        ball.v.y = 100 * dt * ball.a.y + ball.v.y
+    }, {__index = Ball})
+end
 
-        -- update position
-        ball.x = dt * ball.v.x + ball.x
-        ball.y = dt * ball.v.y + ball.y
-    end,
+function Ball:draw()
+    love.graphics.setColor(self.color.r, self.color.g, self.color.b)
+    love.graphics.circle('fill', self.x, self.y, self.r)
+end
 
-    friction = function(f)
-        ball.v.x = ball.v.x - f * ball.v.x
-        ball.v.y = ball.v.y - f * ball.v.y
-    end
-}
+function Ball:update(dt)
+    -- update velocity
+    self.v.x = 10000 * dt * self.a.x + self.v.x
+    self.v.y = 10000 * dt * self.a.y + self.v.y
 
-return ball
+    -- update position
+    self.x = dt * self.v.x + self.x
+    self.y = dt * self.v.y + self.y
+end
+
+function Ball:friction(f)
+    self.v.x = self.v.x - f * self.v.x
+    self.v.y = self.v.y - f * self.v.y
+end

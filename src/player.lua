@@ -1,55 +1,59 @@
 -- Lexball <3
 -- A haxball clone in Lua and Love2d.
 
-local player = {
-    -- center position
-    x = 0,
-    y = 0,
+Player = {}
 
-    -- velocity
-    v = {
+function Player:new()
+    return setmetatable({
+
+        -- center position
         x = 0,
-        y = 0
-    },
+        y = 0,
 
-    -- acceleration
-    a = {
-        x = 0,
-        y = 0
-    },
+        -- velocity
+        v = {
+            x = 0,
+            y = 0
+        },
 
-    -- mass
-    m = 100,
+        -- acceleration
+        a = {
+            x = 0,
+            y = 0
+        },
 
-    -- radius
-    r = 16,
+        -- mass
+        m = 100,
 
-    -- color
-    color = {
-        r = 32,
-        g = 128,
-        b = 255
-    },
+        -- radius
+        r = 16,
 
-    draw = function()
-        love.graphics.setColor(player.color.r, player.color.g, player.color.b)
-        love.graphics.circle('fill', player.x, player.y, player.r)
-    end,
+        -- color
+        color = {
+            r = 32,
+            g = 128,
+            b = 255
+        }
 
-    update = function(dt)
-        -- update velocity
-        player.v.x = 100 * dt * player.a.x + player.v.x
-        player.v.y = 100 * dt * player.a.y + player.v.y
+    }, {__index = Player})
+end
 
-        -- update position
-        player.x = dt * player.v.x + player.x
-        player.y = dt * player.v.y + player.y
-    end,
+function Player:draw()
+    love.graphics.setColor(self.color.r, self.color.g, self.color.b)
+    love.graphics.circle('fill', self.x, self.y, self.r)
+end
 
-    friction = function(f)
-        player.v.x = player.v.x - f * player.v.x
-        player.v.y = player.v.y - f * player.v.y
-    end
-}
+function Player:update(dt)
+    -- update velocity
+    self.v.x = 10000 * dt * self.a.x + self.v.x
+    self.v.y = 10000 * dt * self.a.y + self.v.y
 
-return player
+    -- update position
+    self.x = dt * self.v.x + self.x
+    self.y = dt * self.v.y + self.y
+end
+
+function Player:friction(f)
+    self.v.x = self.v.x - f * self.v.x
+    self.v.y = self.v.y - f * self.v.y
+end

@@ -31,16 +31,18 @@ function love.load()
     love.window.setTitle(version)
     love.window.setMode(window.w, window.h)
 
-    -- load map object
-    map = require 'src/map'
+    -- include object classes
+    require 'src/map'
+    require 'src/player'
+    require 'src/ball'
 
-    -- load player object
-    player = require 'src/player'
+    map = Map:new()
+    player = Player:new()
+    ball = Ball:new()
+
     player.x = map.w / 2
     player.y = map.h / 2
 
-    -- load ball object
-    ball = require 'src/ball'
     ball.x = map.w / 3
     ball.y = map.h /2
 end
@@ -61,6 +63,12 @@ function love.update(dt)
     else
         player.a.x = 0
     end
+
+    local lastplayer = { x = player.x, y = player.y }
+    local lastball = { x = ball.x, y = ball.y }
+
+    player:update(dt)
+    ball:update(dt)
 
     -- collision detection player vs ball
     local collision = sqdist(player, ball) < (player.r + ball.r) ^ 2
@@ -114,21 +122,23 @@ function love.update(dt)
         player.v.y = vref_player.y + vrem_player.y
         ball.v.x = vref_ball.x + vrem_ball.x
         ball.v.y = vref_ball.y + vrem_ball.y
+
+        -- fallback to last safe position before collision happened
+        player.x = lastplayer.x
+        player.y = lastplayer.y
+        ball.x = lastball.x
+        ball.y = lastball.y
     end
 
-    -- update actual objects
-    player.update(dt)
-    ball.update(dt)
-
     -- apply friction effect
-    player.friction(map.friction)
-    ball.friction(map.friction)
+    player:friction(map.friction)
+    ball:friction(map.friction)
 end
 
 function love.draw()
-    map.draw()
-    ball.draw()
-    player.draw()
+    map:draw()
+    ball:draw()
+    player:draw()
 end
 
 function sqdist(a, b)
