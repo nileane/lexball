@@ -11,14 +11,14 @@ function Map:new()
 
         -- friction, float value between 0 and 1
         -- (0 means no friction at all, like in space)
-        friction = 0.8,
+        friction = 0.005,
 
         goals = {
             top = 280,
             bottom = 320
         },
 
-        ground = love.graphics.newImage('assets/rpgTile019.png')
+        ground = love.graphics.newImage('assets/grass.png')
 
     }, {__index = Map})
 end
@@ -30,8 +30,8 @@ function Map:draw()
         y = 0
         while (y < self.h) do
             love.graphics.draw(self.ground, x, y)
-            y = y + 32
+            y = y + 64
         end
-        x = x + 32
+        x = x + 64
     end
 end

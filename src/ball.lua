@@ -45,8 +45,8 @@ end
 
 function Ball:update(dt)
     -- update velocity
-    self.v.x = 10000 * dt * self.a.x + self.v.x
-    self.v.y = 10000 * dt * self.a.y + self.v.y
+    self.v.x = 100 * dt * self.a.x + self.v.x
+    self.v.y = 100 * dt * self.a.y + self.v.y
 
     -- update position
     self.x = dt * self.v.x + self.x
