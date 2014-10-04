@@ -26,21 +26,24 @@ function Ball:new()
         m = 50,
 
         -- radius
-        r = 10,
+        r = 11,
 
         -- color
         color = {
             r = 255,
-            g = 250,
-            b = 220
-        }
+            g = 255,
+            b = 255
+        },
+
+        ball = love.graphics.newImage('assets/ball.png')
 
     }, {__index = Ball})
 end
 
 function Ball:draw()
     love.graphics.setColor(self.color.r, self.color.g, self.color.b)
-    love.graphics.circle('fill', self.x, self.y, self.r)
+    --love.graphics.circle('fill', self.x, self.y, self.r)
+    love.graphics.draw(self.ball, self.x, self.y, 0, 1, 1, self.r, self.r)
 end
 
 function Ball:update(dt)
